@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    /* Warm Sand light theme — HSL triplets */
+    --background: 40 30% 93%; /* warm cream #F4EFE5 */
+    --foreground: 36 14% 14%; /* text charcoal #29251F */
+
+    --card: 42 40% 97%;
+    --card-foreground: 36 14% 14%;
+
+    --popover: 42 44% 98%;
+    --popover-foreground: 36 14% 14%;
+
+    --primary: 24 11% 9%; /* deep charcoal #1A1715 */
+    --primary-foreground: 40 30% 95%;
+
+    --secondary: 35 28% 80%; /* sand beige #D9CBB8 */
+    --secondary-foreground: 30 14% 18%;
+
+    --muted: 35 22% 85%;
+    --muted-foreground: 32 10% 42%; /* muted taupe-ish */
+
+    --accent: 74 100% 60%; /* neon lime #C8FF36 */
+    --accent-foreground: 36 30% 10%;
+
+    --destructive: 2 68% 50%;
+    --destructive-foreground: 40 30% 96%;
+
+    --border: 35 22% 78%;
+    --input: 35 22% 80%;
+    --ring: 74 100% 55%;
+  }
+
+  .dark {
+    --background: 24 11% 9%;
+    --foreground: 40 25% 90%;
+    --card: 26 12% 13%;
+    --card-foreground: 40 25% 90%;
+    --popover: 26 12% 13%;
+    --popover-foreground: 40 25% 90%;
+    --primary: 40 30% 92%;
+    --primary-foreground: 24 11% 9%;
+    --secondary: 30 10% 22%;
+    --secondary-foreground: 40 25% 88%;
+    --muted: 30 8% 20%;
+    --muted-foreground: 35 12% 60%;
+    --accent: 74 100% 60%;
+    --accent-foreground: 36 30% 10%;
+    --destructive: 2 60% 45%;
+    --destructive-foreground: 40 30% 96%;
+    --border: 30 8% 24%;
+    --input: 30 8% 26%;
+    --ring: 74 100% 55%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: #c8ff36;
+    color: #1a1715;
+  }
+}
+
+@layer components {
+  /* Frosted glass panel — the signature surface */
+  .glass {
+    @apply border border-white/40 bg-white/55 backdrop-blur-xl;
+    box-shadow: 0 8px 32px -8px rgba(26, 23, 21, 0.18);
+  }
+  .glass-strong {
+    @apply border border-white/50 bg-white/75 backdrop-blur-2xl;
+    box-shadow: 0 12px 40px -10px rgba(26, 23, 21, 0.22);
+  }
+  .glass-dark {
+    @apply border border-white/10 bg-charcoal/40 text-cream backdrop-blur-xl;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/70;
+    @apply hover:shadow-[0_18px_50px_-12px_rgba(26,23,21,0.28)];
+  }
+
+  /* Lime pill / status chips */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
+  }
+  .chip-lime {
+    @apply bg-lime/20 text-charcoal-text ring-1 ring-inset ring-lime/50;
+  }
+
+  /* Section heading kicker */
+  .kicker {
+    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground;
+  }
+
+  /* Scrollbar */
+  .scroll-slim::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scroll-slim::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-taupe/40;
+  }
+  .scroll-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply relative overflow-hidden rounded-lg bg-sand/40;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@layer components {
+  /* Lime range slider (budget stress testers) */
+  .dds-range {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 9999px;
+    background: #d9cbb8;
+    outline: none;
+  }
+  .dds-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 9999px;
+    background: #1a1715;
+    border: 3px solid #c8ff36;
+    cursor: pointer;
+    box-shadow: 0 2px 8px -1px rgba(26, 23, 21, 0.35);
+    transition: transform 0.12s ease;
+  }
+  .dds-range::-webkit-slider-thumb:hover {
+    transform: scale(1.12);
+  }
+  .dds-range::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 9999px;
+    background: #1a1715;
+    border: 3px solid #c8ff36;
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Print — isolate the document and lay it out for A4 portrait        */
+/* ------------------------------------------------------------------ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 10mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  /* Hide the whole app, reveal only the printable document subtree. */
+  body * {
+    visibility: hidden;
+  }
+  .print-document,
+  .print-document * {
+    visibility: visible;
+  }
+  .print-document {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none !important;
+    border: none !important;
+    background: #fff !important;
+  }
+
+  /* Repeat table headers on every page; keep rows & groups intact. */
+  .print-document thead {
+    display: table-header-group;
+  }
+  .print-document tr {
+    break-inside: avoid;
+  }
+  .print-document .avoid-break {
+    break-inside: avoid;
+  }
+  .print-document .break-after-avoid {
+    break-after: avoid;
+  }
+  /* Ensure background fills (room bands, totals) actually print. */
+  .print-document * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

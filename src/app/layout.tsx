@@ -1,0 +1,35 @@
+import type { Metadata } from "next";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "DesignandDesireStudio Workspace",
+  description:
+    "Premium Interior Design CRM — manage enquiries, clients, projects, moodboards, procurement, budgets and more.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
+      <body className="min-h-screen bg-background">
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  );
+}
